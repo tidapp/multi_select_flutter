@@ -373,29 +373,27 @@ class __MultiSelectChipFieldViewState<V>
                               isAlwaysShown:
                                   widget.scrollBar!.isAlwaysShown,
                               controller: _scrollController,
-                              child: ListView.builder(
-                                controller: _scrollController,
-                                scrollDirection: Axis.vertical,
-                                itemCount: _items.length,
-                                itemBuilder: (ctx, index) {
-                                  return widget.itemBuilder != null
-                                      ? widget.itemBuilder!(
-                                          _items[index] as MultiSelectItem<V>, widget.state!)
-                                      : _buildItem(_items[index] as MultiSelectItem<V?>);
-                                },
+                              child: Wrap(
+                                children: widget.itemBuilder != null
+                                ? _items
+                                    .map((item) =>
+                                        widget.itemBuilder!(item as MultiSelectItem<V>, widget.state!))
+                                    .toList()
+                                : _items
+                                    .map((item) => _buildItem(item as MultiSelectItem<V?>))
+                                    .toList(),
                               ),
                             )
-                          : ListView.builder(
-                              controller: _scrollController,
-                              scrollDirection: Axis.vertical,
-                              itemCount: _items.length,
-                              itemBuilder: (ctx, index) {
-                                return widget.itemBuilder != null
-                                    ? widget.itemBuilder!(
-                                        _items[index] as MultiSelectItem<V>, widget.state!)
-                                    : _buildItem(_items[index] as MultiSelectItem<V?>);
-                              },
-                            ),
+                          : Wrap(
+                            children: widget.itemBuilder != null
+                                ? _items
+                                    .map((item) =>
+                                        widget.itemBuilder!(item as MultiSelectItem<V>, widget.state!))
+                                    .toList()
+                                : _items
+                                    .map((item) => _buildItem(item as MultiSelectItem<V?>))
+                                    .toList(),
+                          ),
                     )
                   : Container(
                       height: widget.height,
