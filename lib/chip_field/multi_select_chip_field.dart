@@ -79,6 +79,9 @@ class MultiSelectChipField<V> extends FormField<List<V>> {
   /// Set the width of the chip.
   final double? chipWidth;
 
+  final double? spacing;
+  final double? runSpacing;
+
   final List<V>? initialValue;
   final AutovalidateMode autovalidateMode;
   final FormFieldValidator<List<V>>? validator;
@@ -116,6 +119,8 @@ class MultiSelectChipField<V> extends FormField<List<V>> {
     this.scrollBar,
     this.showHeader = true,
     this.chipWidth,
+    this.spacing,
+    this.runSpacing,
   }) : super(
             key: key,
             onSaved: onSaved,
@@ -150,6 +155,8 @@ class MultiSelectChipField<V> extends FormField<List<V>> {
                 scrollBar: scrollBar,
                 showHeader: showHeader,
                 chipWidth: chipWidth,
+                spacing: spacing,
+                runSpacing: runSpacing,
               );
               return _MultiSelectChipFieldView<V?>.withState(view as _MultiSelectChipFieldView<V?>, state);
             });
@@ -187,6 +194,8 @@ class _MultiSelectChipFieldView<V> extends StatefulWidget
   final VerticalScrollBar? scrollBar;
   final bool showHeader;
   final double? chipWidth;
+  final double? spacing;
+  final double? runSpacing;
 
   _MultiSelectChipFieldView({
     required this.items,
@@ -216,6 +225,8 @@ class _MultiSelectChipFieldView<V> extends StatefulWidget
     this.scrollBar,
     this.showHeader = true,
     this.chipWidth,
+    this.spacing,
+    this.runSpacing,
   });
 
   /// This constructor allows a FormFieldState to be passed in. Called by MultiSelectChipField.
@@ -248,6 +259,8 @@ class _MultiSelectChipFieldView<V> extends StatefulWidget
         scrollBar = field.scrollBar,
         showHeader = field.showHeader,
         chipWidth = field.chipWidth,
+        spacing = field.spacing,
+        runSpacing = field.runSpacing,
         state = state;
 
   @override
@@ -387,6 +400,8 @@ class __MultiSelectChipFieldViewState<V>
                           : SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Wrap(
+                                spacing: widget.spacing ?? 0,
+                                runSpacing: widget.runSpacing ?? 0,
                                 children: widget.itemBuilder != null
                                   ? _items
                                       .map((item) =>
@@ -403,6 +418,8 @@ class __MultiSelectChipFieldViewState<V>
                       alignment: Alignment.centerLeft,
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: Wrap(
+                        spacing: widget.spacing ?? 0,
+                        runSpacing: widget.runSpacing ?? 0,
                         children: widget.itemBuilder != null
                                 ? _items
                                     .map((item) =>
