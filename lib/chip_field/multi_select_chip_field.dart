@@ -299,7 +299,7 @@ class __MultiSelectChipFieldViewState<V>
                           _showSearch
                               ? Expanded(
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 10),
+                                    //padding: EdgeInsets.only(left: 10),
                                     child: TextField(
                                       style: widget.searchTextStyle,
                                       decoration: InputDecoration(
@@ -321,7 +321,8 @@ class __MultiSelectChipFieldViewState<V>
                                     ),
                                   ),
                                 )
-                              : Padding(
+                              : Expanded(child:
+                                Padding(
                                   //padding: const EdgeInsets.only(left: 8.0),
                                   padding: EdgeInsets.zero,
                                   child: widget.title != null
@@ -331,6 +332,7 @@ class __MultiSelectChipFieldViewState<V>
                                           style: widget.textStyle ?? TextStyle(fontSize: 18),
                                         ),
                                 ),
+                              ),
                           widget.searchable != null && widget.searchable!
                               ? InkWell(
                                   child: _showSearch
