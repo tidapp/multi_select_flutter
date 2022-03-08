@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../util/horizontal_scrollbar.dart';
+import '../util/vertical_scrollbar.dart';
 import '../util/multi_select_item.dart';
 
 /// A widget meant to display selected values as chips.
@@ -36,7 +36,7 @@ class MultiSelectChipDisplay<V> extends StatelessWidget {
   final bool scroll;
 
   /// Enables the scrollbar when scroll is `true`.
-  final HorizontalScrollBar? scrollBar;
+  final VerticalScrollBar? scrollBar;
 
   final ScrollController _scrollController = ScrollController();
 

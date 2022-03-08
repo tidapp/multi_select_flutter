@@ -25,16 +25,16 @@ class MultiSelectChipField<V> extends FormField<List<V>> {
   final Icon? icon;
 
   /// Replaces the deafult search icon when searchable is true.
-  final Icon? searchIcon;
+  final Widget? searchIcon;
 
   /// Replaces the default close search icon when searchable is true.
-  final Icon? closeSearchIcon;
+  final Widget? closeSearchIcon;
 
   /// Set a ShapeBorder. Typically a RoundedRectangularBorder.
   final ShapeBorder? chipShape;
 
   /// Defines the header text.
-  final Text? title;
+  final Widget? title;
 
   /// Enables horizontal scrolling. Default is true.
   final bool scroll;
@@ -71,7 +71,7 @@ class MultiSelectChipField<V> extends FormField<List<V>> {
   final Function(ScrollController)? scrollControl;
 
   /// Define a HorizontalScrollBar.
-  final HorizontalScrollBar? scrollBar;
+  final VerticalScrollBar? scrollBar;
 
   /// Determines whether to show the header.
   final bool showHeader;
@@ -166,10 +166,10 @@ class _MultiSelectChipFieldView<V> extends StatefulWidget
   final TextStyle? textStyle;
   final TextStyle? selectedTextStyle;
   final Icon? icon;
-  final Icon? searchIcon;
-  final Icon? closeSearchIcon;
+  final Widget? searchIcon;
+  final Widget? closeSearchIcon;
   final ShapeBorder? chipShape;
-  final Text? title;
+  final Widget? title;
   final bool scroll;
   final bool? searchable;
   final String? searchHint;
@@ -184,7 +184,7 @@ class _MultiSelectChipFieldView<V> extends StatefulWidget
   final double? height;
   FormFieldState<List<V>>? state;
   final Function(ScrollController)? scrollControl;
-  final HorizontalScrollBar? scrollBar;
+  final VerticalScrollBar? scrollBar;
   final bool showHeader;
   final double? chipWidth;
 
@@ -322,29 +322,18 @@ class __MultiSelectChipFieldViewState<V>
                                   ),
                                 )
                               : Padding(
-                                  padding: const EdgeInsets.only(left: 8.0),
+                                  //padding: const EdgeInsets.only(left: 8.0),
+                                  padding: EdgeInsets.zero,
                                   child: widget.title != null
-                                      ? Text(
-                                          widget.title!.data!,
-                                          style: TextStyle(
-                                              color: widget.title!.style != null
-                                                  ? widget.title!.style!.color
-                                                  : null,
-                                              fontSize:
-                                                  widget.title!.style != null
-                                                      ? widget.title!.style!
-                                                              .fontSize ??
-                                                          18
-                                                      : 18),
-                                        )
+                                      ? widget.title
                                       : Text(
                                           "Select",
-                                          style: TextStyle(fontSize: 18),
+                                          style: widget.textStyle ?? TextStyle(fontSize: 18),
                                         ),
                                 ),
                           widget.searchable != null && widget.searchable!
-                              ? IconButton(
-                                  icon: _showSearch
+                              ? InkWell(
+                                  child: _showSearch
                                       ? widget.closeSearchIcon ??
                                           Icon(
                                             Icons.close,
@@ -355,7 +344,7 @@ class __MultiSelectChipFieldViewState<V>
                                             Icons.search,
                                             size: 22,
                                           ),
-                                  onPressed: () {
+                                  onTap: () {
                                     setState(() {
                                       _showSearch = !_showSearch;
                                       if (!_showSearch) _items = widget.items;
@@ -384,7 +373,7 @@ class __MultiSelectChipFieldViewState<V>
                               controller: _scrollController,
                               child: ListView.builder(
                                 controller: _scrollController,
-                                scrollDirection: Axis.horizontal,
+                                scrollDirection: Axis.vertical,
                                 itemCount: _items.length,
                                 itemBuilder: (ctx, index) {
                                   return widget.itemBuilder != null
