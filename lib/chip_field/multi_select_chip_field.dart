@@ -387,7 +387,7 @@ class __MultiSelectChipFieldViewState<V>
                             )
                           : ListView.builder(
                               controller: _scrollController,
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
                               itemCount: _items.length,
                               itemBuilder: (ctx, index) {
                                 return widget.itemBuilder != null
