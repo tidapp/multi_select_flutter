@@ -384,15 +384,18 @@ class __MultiSelectChipFieldViewState<V>
                                     .toList(),
                               ),
                             )
-                          : Wrap(
-                            children: widget.itemBuilder != null
-                                ? _items
-                                    .map((item) =>
-                                        widget.itemBuilder!(item as MultiSelectItem<V>, widget.state!))
-                                    .toList()
-                                : _items
-                                    .map((item) => _buildItem(item as MultiSelectItem<V?>))
-                                    .toList(),
+                          : SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Wrap(
+                                children: widget.itemBuilder != null
+                                  ? _items
+                                      .map((item) =>
+                                          widget.itemBuilder!(item as MultiSelectItem<V>, widget.state!))
+                                      .toList()
+                                  : _items
+                                      .map((item) => _buildItem(item as MultiSelectItem<V?>))
+                                      .toList(),
+                              ),
                           ),
                     )
                   : Container(
