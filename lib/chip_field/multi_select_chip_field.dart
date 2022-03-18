@@ -309,43 +309,39 @@ class __MultiSelectChipFieldViewState<V>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _showSearch
-                              ? Expanded(
-                                  child: Container(
-                                    //padding: EdgeInsets.only(left: 10),
-                                    child: TextField(
-                                      style: widget.searchTextStyle,
-                                      decoration: InputDecoration(
-                                        hintStyle: widget.searchHintStyle,
-                                        hintText: widget.searchHint ?? "Search",
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: widget.selectedChipColor ??
-                                                Theme.of(context).primaryColor,
+                          Expanded(child:
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 6),
+                              child: 
+                                _showSearch
+                                    ? TextField(
+                                        style: widget.searchTextStyle,
+                                        decoration: InputDecoration(
+                                          hintStyle: widget.searchHintStyle,
+                                          hintText: widget.searchHint ?? "Search",
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: widget.selectedChipColor ??
+                                                  Theme.of(context).primaryColor,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      onChanged: (val) {
-                                        setState(() {
-                                          _items = widget.updateSearchQuery(
-                                              val, widget.items);
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                )
-                              : Expanded(child:
-                                Padding(
-                                  //padding: const EdgeInsets.only(left: 8.0),
-                                  padding: EdgeInsets.zero,
-                                  child: widget.title != null
-                                      ? widget.title
+                                        onChanged: (val) {
+                                          setState(() {
+                                            _items = widget.updateSearchQuery(
+                                                val, widget.items);
+                                          });
+                                        },
+                                      )
+                                  : (widget.title != null
+                                      ? widget.title!
                                       : Text(
                                           "Select",
                                           style: widget.textStyle ?? TextStyle(fontSize: 18),
-                                        ),
-                                ),
-                              ),
+                                        )
+                                  ),
+                            ),
+                          ),
                           widget.searchable != null && widget.searchable!
                               ? InkWell(
                                   child: _showSearch
